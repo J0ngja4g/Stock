@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>สมัครสมาชิก | ระบบจัดการสต็อกสินค้า</title>
+<style>
+
+    :root{
+      --sidebar-bg:#1e293b;
+      --sidebar-active-bg:rgba(255,255,255,0.14);
+      --sidebar-hover-bg:rgba(255,255,255,0.08);
+      --sidebar-text:rgba(255,255,255,0.62);
+      --sidebar-text-active:#ffffff;
+      --content-bg:#f5f6f8;
+      --white:#ffffff;
+      --border:#d9dbe0;
+      --border-light:#edf0f2;
+      --text-dark:#1e293b;
+      --text-body:#292e36;
+      --text-muted:#6b7582;
+      --text-faint:#9ca3ad;
+      --green-bg:#dbfae5; --green-text:#16a34a;
+      --red-bg:#fee3e3; --red-text:#dc2626;
+      --red-row:#feeded;
+      --yellow-bg:#faf9db; --yellow-text:#c99a00;
+      --blue-bg:#e3e9fe; --blue-text:#263edc;
+      --sidebar-w:263px;
+      --topbar-h:68px;
+      --radius-lg:18px;
+      --radius-md:10px;
+      --radius-sm:8px;
+      --shadow-card:0 4px 16px 0 rgba(0,0,0,0.06);
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{
+      font-family:'Inter','Noto Sans Thai',system-ui,-apple-system,sans-serif;
+      background:var(--white);
+      color:var(--text-body);
+      -webkit-font-smoothing:antialiased;
+    }
+    a{text-decoration:none;color:inherit;}
+    button{font-family:inherit;cursor:pointer;}
+    input{font-family:inherit;}
+
+    /* ---------- Login / Register ---------- */
+    .login-wrap{
+      min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background:#fff; position:relative;
+      padding:90px 20px 40px;
+    }
+    .login-topbar{position:absolute; top:0; left:0; right:0; height:68px; background:var(--sidebar-bg);}
+    .login-box{display:flex; flex-direction:column; align-items:center; gap:16px; width:335px; max-width:90vw;}
+    .login-box svg{width:84px;height:84px;}
+    .login-title{font-size:19px; font-weight:700; color:var(--text-dark); margin:0 0 4px;}
+    .login-field{
+      width:100%; height:44px; border:1px solid var(--border); border-radius:10px;
+      padding:0 16px; font-size:14px; outline:none;
+    }
+    .login-field:focus{border-color:var(--text-dark);}
+    .login-btn{
+      width:100%; height:44px; border-radius:999px; border:none; background:#6750A4; color:#fff;
+      font-weight:600; font-size:14px; margin-top:4px;
+    }
+    .login-btn:hover{background:#5a4590;}
+    .login-btn:disabled{background:#b7abd6; cursor:default;}
+    .login-error{color:var(--red-text); font-size:13px; min-height:18px; text-align:center;}
+    .login-success{color:var(--green-text); font-size:13px; min-height:18px; text-align:center;}
+    .login-back{font-size:13px; color:var(--text-muted);}
+    .login-back a{color:#6750A4; font-weight:600;}
+
+</style>
+</head>
+<body>
+
+  <div class="login-wrap">
+    <div class="login-topbar"></div>
+    <div class="login-box">
+      <svg viewBox="0 0 64 64" fill="none"><rect x="6" y="26" width="52" height="30" rx="2" fill="#8FD3E8"/><rect x="6" y="46" width="52" height="10" fill="#F26D4B"/><rect x="26" y="34" width="10" height="22" fill="#5A6B7A"/><path d="M4 20L32 8L60 20L54 28H10L4 20Z" fill="#F6C143"/><rect x="4" y="20" width="56" height="6" fill="#F26D4B"/><rect x="20" y="6" width="24" height="10" fill="#FFF7E0" stroke="#1E293B" stroke-width="1.5"/><text x="32" y="14" font-family="Arial" font-weight="700" font-size="7" fill="#1E293B" text-anchor="middle">STORE</text></svg>
+      <div class="login-title">สร้างบัญชีผู้ใช้ใหม่</div>
+
+      <input class="login-field" id="regFullname" type="text" placeholder="ชื่อ-นามสกุล" autocomplete="name" />
+      <input class="login-field" id="regUsername" type="text" placeholder="Username" autocomplete="username" />
+      <input class="login-field" id="regPassword" type="password" placeholder="Password" autocomplete="new-password" />
+      <input class="login-field" id="regPassword2" type="password" placeholder="ยืนยัน Password" autocomplete="new-password" />
+
+      <div class="login-error" id="regError"></div>
+      <div class="login-success" id="regSuccess"></div>
+
+      <button class="login-btn" id="regBtn">สร้างบัญชี</button>
+
+      <div class="login-back">มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a></div>
+    </div>
+  </div>
+
+<script src="app-data.js"></script>
+<script>
+// ถ้าล็อกอินอยู่แล้วจริง (มีทั้งชื่อผู้ใช้และ token) ให้ข้ามไปหน้าแดชบอร์ดเลย ไม่ต้องมาสมัครซ้ำ
+// เช็คทั้ง currentUser() และ token เพื่อไม่ให้หลงเหลือ session ค้างที่ไม่มี token จริง (ตรงกับ login.html)
+if(currentUser() && localStorage.getItem(LS_TOKEN)){ window.location.href = 'home.html'; }
+
+document.getElementById('regBtn').addEventListener('click', async function(){
+  var fullname  = document.getElementById('regFullname').value.trim();
+  var username  = document.getElementById('regUsername').value.trim();
+  var password  = document.getElementById('regPassword').value.trim();
+  var password2 = document.getElementById('regPassword2').value.trim();
+  var err = document.getElementById('regError');
+  var ok  = document.getElementById('regSuccess');
+  err.textContent = '';
+  ok.textContent = '';
+
+  if(!fullname || !username || !password || !password2){
+    err.textContent = 'กรุณากรอกข้อมูลให้ครบทุกช่อง';
+    return;
+  }
+  if(password.length < 6){
+    err.textContent = 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร';
+    return;
+  }
+  if(password !== password2){
+    err.textContent = 'รหัสผ่านทั้งสองช่องไม่ตรงกัน';
+    return;
+  }
+
+  var btn = document.getElementById('regBtn');
+  btn.disabled = true;
+  btn.textContent = 'กำลังบันทึก...';
+  try{
+    // ส่งข้อมูลผู้ใช้ใหม่ไปบันทึกลงฐานข้อมูล (MySQL) ผ่าน backend API
+    await doRegister(username, password, fullname);
+    ok.textContent = 'สร้างบัญชีสำเร็จ กำลังพาไปหน้าเข้าสู่ระบบ...';
+    setTimeout(function(){
+      window.location.href = 'login.html';
+    }, 1200);
+  }catch(regErr){
+    err.textContent = regErr.message || 'สร้างบัญชีไม่สำเร็จ กรุณาลองใหม่';
+    btn.disabled = false;
+    btn.textContent = 'สร้างบัญชี';
+  }
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Enter') document.getElementById('regBtn').click();
+});
+</script>
+</body>
+</html>
