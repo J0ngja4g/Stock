@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>สต็อกสินค้า | ระบบจัดการสต็อกสินค้า</title>
 <style>
-
     :root{
       --sidebar-bg:#1e293b;
       --sidebar-active-bg:rgba(255,255,255,0.14);
@@ -205,57 +204,6 @@
     .empty-state{padding:60px 20px; text-align:center; color:var(--text-muted);}
     .empty-state svg{width:48px;height:48px;color:#c9ced4; margin-bottom:12px;}
 
-    /* ---------- Dashboard cards ---------- */
-    .alert-banner{
-      background:#ff7171; border-radius:20px; padding:16px 24px;
-      display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px;
-    }
-    .alert-left{display:flex; align-items:center; gap:14px;}
-    .alert-icon{
-      width:36px;height:36px;border-radius:10px; background:rgba(255,255,255,0.35);
-      display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0;
-    }
-    .alert-icon svg{width:20px;height:20px;}
-    .alert-text{color:#fff; font-weight:600; font-size:14px;}
-    .alert-sub{
-      display:inline-block; margin-top:4px; background:rgba(255,255,255,0.55);
-      color:#7a1f1f; font-size:11px; font-weight:700; padding:2px 10px; border-radius:999px;
-    }
-    .alert-btn{
-      background:rgba(255,255,255,0.9); color:#c33; border:none; height:36px; padding:0 16px;
-      border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:6px;
-    }
-    .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
-    .stat-card{
-      border-radius:15px; padding:20px; color:#fff; min-height:120px;
-      display:flex; flex-direction:column; justify-content:center; gap:6px;
-    }
-    .stat-card.orange{background:#f5893c;}
-    .stat-card.gray{background:#c7cbd1;}
-    .stat-title{font-size:15px; font-weight:500; opacity:.95;}
-    .stat-value{font-size:22px; font-weight:700;}
-    @media (max-width:1100px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
-
-    /* ---------- Login ---------- */
-    .login-wrap{
-      min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      background:#fff; position:relative;
-    }
-    .login-topbar{position:absolute; top:0; left:0; right:0; height:68px; background:var(--sidebar-bg);}
-    .login-box{display:flex; flex-direction:column; align-items:center; gap:20px; width:335px; max-width:90vw;}
-    .login-box svg{width:110px;height:110px;}
-    .login-field{
-      width:100%; height:44px; border:1px solid var(--border); border-radius:10px;
-      padding:0 16px; font-size:14px; outline:none;
-    }
-    .login-field:focus{border-color:var(--text-dark);}
-    .login-btn{
-      width:100px; height:44px; border-radius:999px; border:none; background:#6750A4; color:#fff;
-      font-weight:600; font-size:14px; margin-top:4px;
-    }
-    .login-btn:hover{background:#5a4590;}
-    .login-error{color:var(--red-text); font-size:13px; min-height:18px;}
-
     /* ---------- Mobile ---------- */
     .menu-toggle{display:none;}
     @media (max-width:900px){
@@ -269,11 +217,8 @@
       .topbar{padding:0 16px;}
       .topbar-search{width:auto; flex:1;}
       .content{padding:16px;}
-      .stat-grid{grid-template-columns:1fr 1fr;}
       .page-header{align-items:flex-start;}
     }
-
-
 </style>
 </head>
 <body>
@@ -284,9 +229,20 @@
       <div class="avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 19.5C5.8 16.3 8.6 14.5 12 14.5C15.4 14.5 18.2 16.3 19.5 19.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
       <div class="sidebar-user">Admin<span>ผู้ดูแลระบบ</span></div>
     </div>
-    <nav class="sidebar-nav">
-      <a class="nav-item" href="home.html"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>แดชบอร์ด</span></a><a class="nav-item active" href="stock.html"><svg viewBox="0 0 20 20" fill="none"><path d="M2.5 6L10 2.5L17.5 6L10 9.5L2.5 6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2.5 6V14L10 17.5L17.5 14V6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 9.5V17.5" stroke="currentColor" stroke-width="1.6"/></svg><span>สต็อกสินค้า</span></a><a class="nav-item" href="in.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5V13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.5 9L10 13.5L14.5 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17.5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>รับเข้าสินค้า</span></a><a class="nav-item" href="out.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 17.5V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.5 11L10 6.5L14.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 2.5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>จ่ายสินค้า</span></a><a class="nav-item" href="history.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 5.5V10L13 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 10a7 7 0 1 1-2.05-4.95" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 3.5V7.5H13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ประวัติการทำรายการ</span></a><a class="nav-item" href="manage.html"><svg viewBox="0 0 20 20" fill="none"><path d="M3 5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 10H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 15H12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>จัดการสินค้า</span></a><a class="nav-item" href="borrow.html"><svg viewBox="0 0 20 20" fill="none"><path d="M6 8V5.5A2.5 2.5 0 0 1 8.5 3h3A2.5 2.5 0 0 1 14 5.5V8" stroke="currentColor" stroke-width="1.6"/><rect x="3.5" y="8" width="13" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>ยืมคืนสินค้า</span></a>
-    </nav>
+   <nav class="sidebar-nav">
+  <!-- แดชบอร์ด (ถ้าต้องการให้ทุกคนเห็น หรือจำกัดเฉพาะผู้บริหาร ปรับตามต้องการ) -->
+  <a class="nav-item" href="home.html"><span>แดชบอร์ด</span></a>
+  
+  <!-- หน้าที่พนักงานทั่วไปเห็นได้ -->
+  <a class="nav-item" href="stock.html"><span>สต็อกสินค้า</span></a>
+  <a class="nav-item" href="borrow.html" data-role="owner, admin, manager, stock_staff, cashier"><span>ยืมคืนสินค้า</span></a>
+  
+  <!-- หน้าที่เฉพาะเจ้าของร้านและผู้จัดการเท่านั้นที่เห็น -->
+  <a class="nav-item" href="in.html" data-role="owner, admin, manager"><span>รับเข้าสินค้า</span></a>
+  <a class="nav-item" href="out.html" data-role="owner, admin, manager"><span>จ่ายสินค้า</span></a>
+  <a class="nav-item" href="history.html" data-role="owner, admin, manager"><span>ประวัติการทำรายการ</span></a>
+  <a class="nav-item" href="manage.html" data-role="owner, admin"><span>จัดการสินค้า</span></a>
+</nav>
     <div class="sidebar-footer">
       <a class="nav-item logout" href="login.html"><svg viewBox="0 0 20 20" fill="none"><path d="M8 17.5H4.5A1.5 1.5 0 0 1 3 16V4a1.5 1.5 0 0 1 1.5-1.5H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 14L17 10L13 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 10H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Logout</span></a>
     </div>
@@ -310,8 +266,9 @@
     <div class="page-header">
       <h1 class="page-title">สต็อกสินค้า</h1>
       <div class="header-actions">
-        <button class="btn btn-secondary" id="stockExcelBtn">นำเข้า/ส่งออก Excel</button>
-        <button class="btn btn-primary" id="stockAddBtn">+ เพิ่มสินค้า</button>
+        <!-- ซ่อนปุ่ม Excel และปุ่มเพิ่มสินค้า ตาม Role -->
+        <button class="btn btn-secondary" id="stockExcelBtn" data-role="owner, admin, manager, stock_staff">นำเข้า/ส่งออก Excel</button>
+        <button class="btn btn-primary" id="stockAddBtn" data-role="owner, admin, manager, stock_staff">+ เพิ่มสินค้า</button>
       </div>
     </div>
 
@@ -388,6 +345,9 @@ document.querySelectorAll('.pagination .page-btn').forEach(function(btn, idx){
 requireAuth();
 initSidebarUser();
 
+// เรียกใช้ฟังก์ชันซ่อนปุ่มตาม data-role
+renderRoleUI();
+
 // ---------- วาดตารางสต็อกสินค้าทั้งหมดจากข้อมูลจริง ----------
 function renderStockTable(){
   var tbody = document.getElementById('stockTableBody');
@@ -412,12 +372,19 @@ function renderStockTable(){
 }
 renderStockTable();
 
-document.getElementById('stockAddBtn').addEventListener('click', function(){
-  window.location.href = 'manage.html'; // การเพิ่ม/แก้ไข/ลบสินค้าทำที่หน้าจัดการสินค้า
-});
-document.getElementById('stockExcelBtn').addEventListener('click', function(){
-  showToast('ฟีเจอร์นำเข้า/ส่งออก Excel ยังไม่เปิดใช้งานในระบบสาธิตนี้');
-});
+var addBtn = document.getElementById('stockAddBtn');
+if(addBtn){
+    addBtn.addEventListener('click', function(){
+      window.location.href = 'manage.html'; // การเพิ่ม/แก้ไข/ลบสินค้าทำที่หน้าจัดการสินค้า
+    });
+}
+
+var excelBtn = document.getElementById('stockExcelBtn');
+if(excelBtn){
+    excelBtn.addEventListener('click', function(){
+      showToast('ฟีเจอร์นำเข้า/ส่งออก Excel ยังไม่เปิดใช้งานในระบบสาธิตนี้');
+    });
+}
 
 function setupTableFilter(searchInputId, categorySelectId, tableBodyId){
   var searchInput = document.getElementById(searchInputId);

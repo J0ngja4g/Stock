@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>สมัครสมาชิก | ระบบจัดการสต็อกสินค้า</title>
 <style>
-
     :root{
       --sidebar-bg:#1e293b;
       --sidebar-active-bg:rgba(255,255,255,0.14);
@@ -42,7 +41,7 @@
     }
     a{text-decoration:none;color:inherit;}
     button{font-family:inherit;cursor:pointer;}
-    input{font-family:inherit;}
+    input, select{font-family:inherit;}
 
     /* ---------- Login / Register ---------- */
     .login-wrap{
@@ -56,7 +55,7 @@
     .login-title{font-size:19px; font-weight:700; color:var(--text-dark); margin:0 0 4px;}
     .login-field{
       width:100%; height:44px; border:1px solid var(--border); border-radius:10px;
-      padding:0 16px; font-size:14px; outline:none;
+      padding:0 16px; font-size:14px; outline:none; background-color: var(--white);
     }
     .login-field:focus{border-color:var(--text-dark);}
     .login-btn{
@@ -84,6 +83,15 @@
       <input class="login-field" id="regUsername" type="text" placeholder="Username" autocomplete="username" />
       <input class="login-field" id="regPassword" type="password" placeholder="Password" autocomplete="new-password" />
       <input class="login-field" id="regPassword2" type="password" placeholder="ยืนยัน Password" autocomplete="new-password" />
+      
+      <!-- ช่องเลือก Role -->
+      <select class="login-field" id="regRole" style="color: var(--text-body);">
+        <option value="stock_staff">พนักงานคลังสินค้า</option>
+        <option value="cashier">พนักงานแคชเชียร์</option>
+        <option value="manager">ผู้จัดการร้าน</option>
+        <option value="owner">ผู้บริหาร</option>
+        <option value="admin">ผู้ดูแลระบบ</option>
+      </select>
 
       <div class="login-error" id="regError"></div>
       <div class="login-success" id="regSuccess"></div>
@@ -96,19 +104,18 @@
 
 <script src="app-data.js"></script>
 <script>
-// ถ้าล็อกอินอยู่แล้วจริง (มีทั้งชื่อผู้ใช้และ token) ให้ข้ามไปหน้าแดชบอร์ดเลย ไม่ต้องมาสมัครซ้ำ
-// เช็คทั้ง currentUser() และ token เพื่อไม่ให้หลงเหลือ session ค้างที่ไม่มี token จริง (ตรงกับ login.html)
 if(currentUser() && localStorage.getItem(LS_TOKEN)){ window.location.href = 'home.html'; }
 
-document.getElementById('regBtn').addEventListener('click', async function(){
+document.getElementById('regBtn').addEventListener('click', function(){
   var fullname  = document.getElementById('regFullname').value.trim();
   var username  = document.getElementById('regUsername').value.trim();
   var password  = document.getElementById('regPassword').value.trim();
   var password2 = document.getElementById('regPassword2').value.trim();
+  var role      = document.getElementById('regRole').value; 
   var err = document.getElementById('regError');
   var ok  = document.getElementById('regSuccess');
-  err.textContent = '';
-  ok.textContent = '';
+  
+  err.textContent = ''; ok.textContent = '';
 
   if(!fullname || !username || !password || !password2){
     err.textContent = 'กรุณากรอกข้อมูลให้ครบทุกช่อง';
@@ -123,25 +130,56 @@ document.getElementById('regBtn').addEventListener('click', async function(){
     return;
   }
 
-  var btn = document.getElementById('regBtn');
-  btn.disabled = true;
-  btn.textContent = 'กำลังบันทึก...';
-  try{
-    // ส่งข้อมูลผู้ใช้ใหม่ไปบันทึกลงฐานข้อมูล (MySQL) ผ่าน backend API
-    await doRegister(username, password, fullname);
-    ok.textContent = 'สร้างบัญชีสำเร็จ กำลังพาไปหน้าเข้าสู่ระบบ...';
-    setTimeout(function(){
-      window.location.href = 'login.html';
-    }, 1200);
-  }catch(regErr){
-    err.textContent = regErr.message || 'สร้างบัญชีไม่สำเร็จ กรุณาลองใหม่';
-    btn.disabled = false;
-    btn.textContent = 'สร้างบัญชี';
-  }
+  // เด้งหน้าต่าง (Modal) ให้ Manager/Admin กรอกรหัสยืนยัน
+  var modalBody = openModal('ยืนยันตัวตนผู้อนุมัติ');
+  
+  modalBody.innerHTML = 
+    '<div style="font-size:13px; color:#6b7582; margin-bottom:8px;">การสร้างบัญชีพนักงานใหม่ จำเป็นต้องได้รับการอนุมัติจากผู้มีสิทธิ์ระดับ "ผู้จัดการ" ขึ้นไป</div>' +
+    fieldHtml('Username (ผู้อนุมัติ)', '<input id="authUsername" style="'+inputStyle+'" autocomplete="off" />') +
+    fieldHtml('Password (ผู้อนุมัติ)', '<input id="authPassword" type="password" style="'+inputStyle+'" autocomplete="off" />') +
+    '<div id="authError" style="color:var(--red-text); font-size:13px; min-height:18px; text-align:center;"></div>' +
+    '<button id="confirmAuthBtn" class="login-btn" style="width:100%;">ยืนยันและสร้างบัญชี</button>';
+
+  document.getElementById('confirmAuthBtn').addEventListener('click', async function(){
+    var authUser = document.getElementById('authUsername').value.trim();
+    var authPass = document.getElementById('authPassword').value.trim();
+    var authErr = document.getElementById('authError');
+    var confirmBtn = document.getElementById('confirmAuthBtn');
+    
+    authErr.textContent = '';
+    
+    if(!authUser || !authPass) {
+        authErr.textContent = 'กรุณากรอกข้อมูลผู้อนุมัติให้ครบถ้วน';
+        return;
+    }
+
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'กำลังตรวจสอบสิทธิ์...';
+
+    try {
+      var newUserParams = { username: username, password: password, fullname: fullname, role: role };
+      await doAuthorizedRegister(newUserParams, authUser, authPass);
+      
+      closeModal();
+      ok.textContent = 'ผู้อนุมัติสำเร็จ! สร้างบัญชีเรียบร้อย กำลังพาไปหน้าล็อกอิน...';
+      setTimeout(function(){
+        window.location.href = 'login.html';
+      }, 1500);
+      
+    } catch (error) {
+      authErr.textContent = error.message;
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = 'ยืนยันและสร้างบัญชี';
+    }
+  });
 });
 
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Enter') document.getElementById('regBtn').click();
+  if(e.key === 'Enter') {
+      var modalBtn = document.getElementById('confirmAuthBtn');
+      if(modalBtn) modalBtn.click();
+      else document.getElementById('regBtn').click();
+  }
 });
 </script>
 </body>
