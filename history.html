@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ประวัติการทำรายการ | ระบบจัดการสต็อกสินค้า</title>
 <style>
-
     :root{
       --sidebar-bg:#1e293b;
       --sidebar-active-bg:rgba(255,255,255,0.14);
@@ -205,57 +204,6 @@
     .empty-state{padding:60px 20px; text-align:center; color:var(--text-muted);}
     .empty-state svg{width:48px;height:48px;color:#c9ced4; margin-bottom:12px;}
 
-    /* ---------- Dashboard cards ---------- */
-    .alert-banner{
-      background:#ff7171; border-radius:20px; padding:16px 24px;
-      display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px;
-    }
-    .alert-left{display:flex; align-items:center; gap:14px;}
-    .alert-icon{
-      width:36px;height:36px;border-radius:10px; background:rgba(255,255,255,0.35);
-      display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0;
-    }
-    .alert-icon svg{width:20px;height:20px;}
-    .alert-text{color:#fff; font-weight:600; font-size:14px;}
-    .alert-sub{
-      display:inline-block; margin-top:4px; background:rgba(255,255,255,0.55);
-      color:#7a1f1f; font-size:11px; font-weight:700; padding:2px 10px; border-radius:999px;
-    }
-    .alert-btn{
-      background:rgba(255,255,255,0.9); color:#c33; border:none; height:36px; padding:0 16px;
-      border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:6px;
-    }
-    .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
-    .stat-card{
-      border-radius:15px; padding:20px; color:#fff; min-height:120px;
-      display:flex; flex-direction:column; justify-content:center; gap:6px;
-    }
-    .stat-card.orange{background:#f5893c;}
-    .stat-card.gray{background:#c7cbd1;}
-    .stat-title{font-size:15px; font-weight:500; opacity:.95;}
-    .stat-value{font-size:22px; font-weight:700;}
-    @media (max-width:1100px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
-
-    /* ---------- Login ---------- */
-    .login-wrap{
-      min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      background:#fff; position:relative;
-    }
-    .login-topbar{position:absolute; top:0; left:0; right:0; height:68px; background:var(--sidebar-bg);}
-    .login-box{display:flex; flex-direction:column; align-items:center; gap:20px; width:335px; max-width:90vw;}
-    .login-box svg{width:110px;height:110px;}
-    .login-field{
-      width:100%; height:44px; border:1px solid var(--border); border-radius:10px;
-      padding:0 16px; font-size:14px; outline:none;
-    }
-    .login-field:focus{border-color:var(--text-dark);}
-    .login-btn{
-      width:100px; height:44px; border-radius:999px; border:none; background:#6750A4; color:#fff;
-      font-weight:600; font-size:14px; margin-top:4px;
-    }
-    .login-btn:hover{background:#5a4590;}
-    .login-error{color:var(--red-text); font-size:13px; min-height:18px;}
-
     /* ---------- Mobile ---------- */
     .menu-toggle{display:none;}
     @media (max-width:900px){
@@ -269,11 +217,8 @@
       .topbar{padding:0 16px;}
       .topbar-search{width:auto; flex:1;}
       .content{padding:16px;}
-      .stat-grid{grid-template-columns:1fr 1fr;}
       .page-header{align-items:flex-start;}
     }
-
-
 </style>
 </head>
 <body>
@@ -285,7 +230,18 @@
       <div class="sidebar-user">Admin<span>ผู้ดูแลระบบ</span></div>
     </div>
     <nav class="sidebar-nav">
-      <a class="nav-item" href="home.html"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>แดชบอร์ด</span></a><a class="nav-item" href="stock.html"><svg viewBox="0 0 20 20" fill="none"><path d="M2.5 6L10 2.5L17.5 6L10 9.5L2.5 6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2.5 6V14L10 17.5L17.5 14V6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 9.5V17.5" stroke="currentColor" stroke-width="1.6"/></svg><span>สต็อกสินค้า</span></a><a class="nav-item" href="in.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5V13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.5 9L10 13.5L14.5 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17.5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>รับเข้าสินค้า</span></a><a class="nav-item" href="out.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 17.5V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.5 11L10 6.5L14.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 2.5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>จ่ายสินค้า</span></a><a class="nav-item active" href="history.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 5.5V10L13 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 10a7 7 0 1 1-2.05-4.95" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 3.5V7.5H13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ประวัติการทำรายการ</span></a><a class="nav-item" href="manage.html"><svg viewBox="0 0 20 20" fill="none"><path d="M3 5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 10H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 15H12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>จัดการสินค้า</span></a><a class="nav-item" href="borrow.html"><svg viewBox="0 0 20 20" fill="none"><path d="M6 8V5.5A2.5 2.5 0 0 1 8.5 3h3A2.5 2.5 0 0 1 14 5.5V8" stroke="currentColor" stroke-width="1.6"/><rect x="3.5" y="8" width="13" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>ยืมคืนสินค้า</span></a>
+      <a class="nav-item" href="home.html"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>แดชบอร์ด</span></a>
+      <a class="nav-item" href="stock.html"><svg viewBox="0 0 20 20" fill="none"><path d="M2.5 6L10 2.5L17.5 6L10 9.5L2.5 6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2.5 6V14L10 17.5L17.5 14V6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 9.5V17.5" stroke="currentColor" stroke-width="1.6"/></svg><span>สต็อกสินค้า</span></a>
+      <a class="nav-item" href="in.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5V13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.5 9L10 13.5L14.5 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17.5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>รับเข้าสินค้า</span></a>
+      <a class="nav-item" href="out.html"><svg viewBox="0 0 20 20" fill="none"><path d="M10 17.5V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.5 11L10 6.5L14.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 2.5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>จ่ายสินค้า</span></a>
+      
+      <!-- หน้าประวัติการทำรายการ (จำกัดสิทธิ์ให้เฉพาะ Owner, Admin, Manager) -->
+      <a class="nav-item active" href="history.html" data-role="owner, admin, manager">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M10 5.5V10L13 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 10a7 7 0 1 1-2.05-4.95" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 3.5V7.5H13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>ประวัติการทำรายการ</span>
+      </a>
+      <a class="nav-item" href="manage.html" data-role="owner, admin"><svg viewBox="0 0 20 20" fill="none"><path d="M3 5H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 10H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 15H12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>จัดการสินค้า</span></a>
+      <a class="nav-item" href="borrow.html" data-role="owner, admin, manager, stock_staff"><svg viewBox="0 0 20 20" fill="none"><path d="M6 8V5.5A2.5 2.5 0 0 1 8.5 3h3A2.5 2.5 0 0 1 14 5.5V8" stroke="currentColor" stroke-width="1.6"/><rect x="3.5" y="8" width="13" height="8.5" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg><span>ยืมคืนสินค้า</span></a>
     </nav>
     <div class="sidebar-footer">
       <a class="nav-item logout" href="login.html"><svg viewBox="0 0 20 20" fill="none"><path d="M8 17.5H4.5A1.5 1.5 0 0 1 3 16V4a1.5 1.5 0 0 1 1.5-1.5H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 14L17 10L13 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 10H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Logout</span></a>
@@ -293,96 +249,77 @@
   </aside>
 
     <div class="main">
-      
-    <div class="topbar">
-      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2.5 5H17.5M2.5 10H17.5M2.5 15H17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-      <div class="topbar-search">
-        <svg viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16L12.4 12.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <input id="topSearch" type="text" placeholder="ค้นหาชื่อ/รหัสสินค้า" />
+      <div class="topbar">
+        <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2.5 5H17.5M2.5 10H17.5M2.5 15H17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <div class="topbar-search">
+          <svg viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16L12.4 12.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input id="topSearch" type="text" placeholder="ค้นหาชื่อ/รหัสสินค้า" />
+        </div>
+        <button class="topbar-icon-btn"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5c-.6 0-1 .5-1 1v.6C6.5 4.6 5 6.6 5 9v3l-1.4 2.1c-.3.5.1 1.2.7 1.2h11.4c.6 0 1-.7.7-1.2L15 12V9c0-2.4-1.5-4.4-4-4.9V3.5c0-.5-.4-1-1-1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 16.2a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.4"/></svg></button>
       </div>
-      <button class="topbar-icon-btn"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2.5c-.6 0-1 .5-1 1v.6C6.5 4.6 5 6.6 5 9v3l-1.4 2.1c-.3.5.1 1.2.7 1.2h11.4c.6 0 1-.7.7-1.2L15 12V9c0-2.4-1.5-4.4-4-4.9V3.5c0-.5-.4-1-1-1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 16.2a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.4"/></svg></button>
-    </div>
 
       <div class="content">
-        
-    <div class="page-header">
-      <h1 class="page-title">ประวัติการทำรายการ</h1>
-      <div class="header-actions">
-        <button class="btn btn-secondary" id="historyExcelBtn">นำเข้า/ส่งออก Excel</button>
-        <button class="btn btn-primary" id="historyClearBtn">ล้างตัวกรอง</button>
-      </div>
-    </div>
+        <div class="page-header">
+          <h1 class="page-title">ประวัติการทำรายการ</h1>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="historyExcelBtn" data-role="owner, admin, manager">นำเข้า/ส่งออก Excel</button>
+            <button class="btn btn-primary" id="historyClearBtn">ล้างตัวกรอง</button>
+          </div>
+        </div>
 
-    <div class="filter-bar">
-      <div class="search-input"><svg viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16L12.4 12.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input id="historySearch" type="text" placeholder="ค้นหาชื่อ/รหัสสินค้า" /></div>
-      <select id="historyCategory" class="dropdown" style="appearance:none;-webkit-appearance:none;">
-        <option value="all" selected>หมวดหมู่ทั้งหมด</option>
-        <option value="รับเข้าสินค้า">รับเข้าสินค้า</option>
-        <option value="จ่ายสินค้า">จ่ายสินค้า</option>
-        <option value="ยืมสินค้า">ยืมสินค้า</option>
-        <option value="แก้ไขข้อมูล">แก้ไขข้อมูล</option>
-      </select>
-    </div>
+        <div class="filter-bar">
+          <div class="search-input"><svg viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M16 16L12.4 12.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input id="historySearch" type="text" placeholder="ค้นหาชื่อ/รหัสสินค้า" /></div>
+          <select id="historyCategory" class="dropdown" style="appearance:none;-webkit-appearance:none;">
+            <option value="all" selected>หมวดหมู่ทั้งหมด</option>
+            <option value="รับเข้าสินค้า">รับเข้าสินค้า</option>
+            <option value="จ่ายสินค้า">จ่ายสินค้า</option>
+            <option value="ยืมสินค้า">ยืมสินค้า</option>
+            <option value="แก้ไขข้อมูล">แก้ไขข้อมูล</option>
+          </select>
+        </div>
 
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:160px;">วันที่/เวลา</th>
-            <th style="width:130px;">ประเภทรายการ</th>
-            <th>ชื่อสินค้า</th>
-            <th style="width:100px;">รหัส SKU</th>
-            <th style="width:150px;">จำนวน</th>
-            <th style="width:140px;">ผู้ทำรายการ</th>
-          </tr>
-        </thead>
-        <tbody id="historyTableBody">
-        <tr class="no-results-row" style="display:none;"><td colspan="6"><div class="empty-state">ไม่พบรายการ</div></td></tr>
-        </tbody>
-      </table>
-      
-<div class="table-footer">
-  <div class="pagination">
-    <button class="page-btn" onclick="changePage(-1)">&lt;</button>
-    <button class="page-btn active">1</button>
-    <button class="page-btn">2</button>
-    <button class="page-btn">3</button>
-    <button class="page-btn">4</button>
-    <button class="page-btn">5</button>
-    <button class="page-btn" onclick="changePage(1)">&gt;</button>
-  </div>
-</div>
-<script>
-function changePage(dir){
-  var btns = document.querySelectorAll('.pagination .page-btn');
-  var nums = Array.prototype.slice.call(btns, 1, btns.length-1);
-  var activeIdx = nums.findIndex(b => b.classList.contains('active'));
-  var next = activeIdx + dir;
-  if(next < 0 || next >= nums.length) return;
-  nums[activeIdx].classList.remove('active');
-  nums[next].classList.add('active');
-}
-document.querySelectorAll('.pagination .page-btn').forEach(function(btn, idx){
-  if(idx>0 && idx < document.querySelectorAll('.pagination .page-btn').length-1){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('.pagination .page-btn.active').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  }
-});
-</script>
-
-    </div>
-
+        <div class="card">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:160px;">วันที่/เวลา</th>
+                <th style="width:130px;">ประเภทรายการ</th>
+                <th>ชื่อสินค้า</th>
+                <th style="width:100px;">รหัส SKU</th>
+                <th style="width:150px;">จำนวน</th>
+                <th style="width:140px;">ผู้ทำรายการ</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr class="no-results-row" style="display:none;"><td colspan="6"><div class="empty-state">ไม่พบรายการ</div></td></tr>
+            </tbody>
+          </table>
+          
+          <div class="table-footer">
+            <div class="pagination">
+              <button class="page-btn" onclick="changePage(-1)">&lt;</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn">4</button>
+              <button class="page-btn">5</button>
+              <button class="page-btn" onclick="changePage(1)">&gt;</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
 <script src="app-data.js"></script>
 <script>
-requireAuth();
+// ---------- ล็อกสิทธิ์หน้าเว็บ ----------
+// อนุญาตให้เฉพาะ owner, admin, manager เข้าได้ หากไม่ใช่จะถูกดีดออก
+requireAccess(['owner', 'admin', 'manager']); 
 initSidebarUser();
+renderRoleUI();
 
 // ---------- วาดตารางประวัติการทำรายการทั้งหมด (ล่าสุดอยู่บนสุด) ----------
 function renderHistoryTable(){
@@ -393,7 +330,7 @@ function renderHistoryTable(){
   history.forEach(function(h){
     html += '<tr data-name="'+h.name+'" data-sku="'+h.sku+'" data-cat="">' +
       '<td class="col-muted">'+h.dt+'</td>' +
-      '<td><span class="badge '+HISTORY_BADGE[h.type]+'">'+h.type+'</span></td>' +
+      '<td><span class="badge '+(HISTORY_BADGE[h.type] || 'badge-blue')+'">'+h.type+'</span></td>' +
       '<td class="col-name">'+h.name+'</td>' +
       '<td class="col-muted">'+h.sku+'</td>' +
       '<td class="col-strong">'+h.qtyText+'</td>' +
@@ -411,6 +348,7 @@ document.getElementById('historyClearBtn').addEventListener('click', function(){
   document.getElementById('historySearch').dispatchEvent(new Event('input'));
   document.getElementById('historyCategory').dispatchEvent(new Event('change'));
 });
+
 document.getElementById('historyExcelBtn').addEventListener('click', function(){
   showToast('ฟีเจอร์นำเข้า/ส่งออก Excel ยังไม่เปิดใช้งานในระบบสาธิตนี้');
 });
@@ -442,7 +380,6 @@ function setupTableFilter(searchInputId, categorySelectId, tableBodyId){
   if(searchInput) searchInput.addEventListener('input', applyFilter);
   if(catSelect) catSelect.addEventListener('change', applyFilter);
 
-  // sync main topbar search box too
   var topSearch = document.getElementById('topSearch');
   if(topSearch && searchInput){
     topSearch.addEventListener('input', function(){
@@ -452,11 +389,8 @@ function setupTableFilter(searchInputId, categorySelectId, tableBodyId){
   }
 }
 
-function toggleDropdownOptions(selectEl){
-  selectEl.style.display = selectEl.style.display === 'block' ? 'none' : 'block';
-}
-
 setupTableFilter('historySearch', null, 'historyTableBody');
+
 document.getElementById('historyCategory').addEventListener('change', function(){
   var val = this.value;
   var rows = document.querySelectorAll('#historyTableBody tr[data-name]');
@@ -467,6 +401,24 @@ document.getElementById('historyCategory').addEventListener('change', function()
   });
 });
 
+function changePage(dir){
+  var btns = document.querySelectorAll('.pagination .page-btn');
+  var nums = Array.prototype.slice.call(btns, 1, btns.length-1);
+  var activeIdx = nums.findIndex(b => b.classList.contains('active'));
+  var next = activeIdx + dir;
+  if(next < 0 || next >= nums.length) return;
+  nums[activeIdx].classList.remove('active');
+  nums[next].classList.add('active');
+}
+
+document.querySelectorAll('.pagination .page-btn').forEach(function(btn, idx){
+  if(idx>0 && idx < document.querySelectorAll('.pagination .page-btn').length-1){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.pagination .page-btn.active').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  }
+});
 </script>
 </body>
 </html>
